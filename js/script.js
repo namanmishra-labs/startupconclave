@@ -63,25 +63,17 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- 3. COUNTDOWN TIMER --- */
   const countdownEls = document.querySelectorAll('[data-countdown]');
   const inlineCountdown = document.querySelector('[data-countdown-inline]');
-  // Registration deadline: 10 October 2026, 23:59:59 IST
-  const targetDate = new Date('2026-10-10T23:59:59+05:30').getTime();
+  // Registration deadline: 12 October 2026, 23:59:59 IST
+  const targetDate = new Date('2026-10-12T23:59:59+05:30').getTime();
 
   function updateCountdown() {
     const now = new Date().getTime();
     const distance = targetDate - now;
 
     if (distance < 0) {
-      if (inlineCountdown) inlineCountdown.textContent = 'Closed';
+      if (inlineCountdown) inlineCountdown.textContent = 'Deadline reached';
       document.querySelectorAll('.cd-num').forEach(el => el.textContent = '00');
       
-      // Registration closed: disable the Register buttons and show the deadline notice
-      document.querySelectorAll('[data-open-form]').forEach(btn => {
-        btn.removeAttribute('href');
-        btn.setAttribute('aria-disabled', 'true');
-        btn.textContent = 'Registrations closed';
-      });
-      const closedNote = document.querySelector('[data-reg-closed-note]');
-      if (closedNote) closedNote.hidden = false;
       return;
     }
 
@@ -128,8 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --- 4. POSTER MODAL --- */
-  const startupPopup = document.querySelector('[data-startup-popup]');
-  const popupCloseBtn = document.querySelector('[data-popup-close]');
   const modal = document.querySelector('[data-poster-modal]');
   const openBtns = document.querySelectorAll('[data-poster-open]');
   const closeBtn = document.querySelector('[data-modal-close]');
