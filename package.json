@@ -1,0 +1,9 @@
+{
+  "name": "startupconclave",
+  "version": "1.0.0",
+  "description": "Startup Conclave '26 Official Website",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve ."
+  }
+}
