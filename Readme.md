@@ -12,9 +12,9 @@ This is a static, single-page website built with HTML, CSS, and vanilla JavaScri
 - Light and dark themes, with the selected theme preference saved in browser storage.
 - Event schedule with day and session-type filters, plus downloadable calendar files.
 - Registration links for exhibition, pitching, and attendee categories.
-- Startup poster popup on page load and a separate poster lightbox.
+- Separate poster lightbox.
 - FAQ and event-guidelines tabs.
-- Countdown to the registration deadline: 10 October 2026 at 23:59:59 India Standard Time.
+- Countdown to the registration deadline: 12 October 2026 at 23:59:59 India Standard Time.
 
 ## Run locally
 
@@ -51,7 +51,6 @@ startupconclave/
     ├── favicon.png
     ├── idealab-logo.png
     ├── final-poster.png
-    ├── pop_up_poster.png
     └── unnamed.webp
 ```
 
@@ -60,7 +59,7 @@ startupconclave/
 - Page copy, dates, and section markup: `index.html`.
 - Layout, responsive behavior, and themes: `css/style.css` and `css/poster-theme.css`.
 - Interactions, countdown, and Google Forms configuration (`GOOGLE_FORM_URLS`): `js/script.js`.
-- Image roles: `final-poster.png` is the hero poster, `conclave-poster.jpg` is used by the lightbox, `conclave-poster.png` is the social preview, and `pop_up_poster.png` is the startup popup. The remaining images provide the event logo, partner logos, and favicon.
+- Image roles: `final-poster.png` is the hero poster, `conclave-poster.jpg` is used by the lightbox, and `conclave-poster.png` is the social preview. The remaining images provide the event logo, partner logos, and favicon.
 
 Registration form URLs are maintained in `GOOGLE_FORM_URLS` in `js/script.js`. Update those values when registration links change.
 
