@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const countdownEls = document.querySelectorAll('[data-countdown]');
   const inlineCountdown = document.querySelector('[data-countdown-inline]');
 
-// Registration deadline: 12 October 2026, 00:00:00 IST
-const targetDate = new Date('2026-10-12T00:00:00+05:30').getTime();
 
+// Registration deadline: 12 October 2026, 23:59:59 IST
+const targetDate = new Date('2026-10-12T23:59:59+05:30').getTime();
 
   function updateCountdown() {
     const now = new Date().getTime();
