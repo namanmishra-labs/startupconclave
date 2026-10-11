@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- 1. THEME TOGGLE --- */
   const themeToggles = document.querySelectorAll('[data-theme-toggle]');
   const html = document.documentElement;
-  
+
   // The inline script in head already set the initial theme from localStorage
   // If no theme is set, fallback to dark since it's the default in HTML
   if (!html.getAttribute('data-theme')) {
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- 2. MOBILE NAVIGATION --- */
   const navToggle = document.querySelector('[data-nav-toggle]');
   const mainNav = document.getElementById('main-nav');
-  
+
   if (navToggle && mainNav) {
     navToggle.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -63,17 +63,25 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- 3. COUNTDOWN TIMER --- */
   const countdownEls = document.querySelectorAll('[data-countdown]');
   const inlineCountdown = document.querySelector('[data-countdown-inline]');
-  // Registration deadline: 12 October 2026, 23:59:59 IST
-  const targetDate = new Date('2026-10-12T23:59:59+05:30').getTime();
+  // Registration deadline: 10 October 2026, 23:59:59 IST
+  const targetDate = new Date('2026-10-10T23:59:59+05:30').getTime();
 
   function updateCountdown() {
     const now = new Date().getTime();
     const distance = targetDate - now;
 
     if (distance < 0) {
-      if (inlineCountdown) inlineCountdown.textContent = 'Deadline reached';
+      if (inlineCountdown) inlineCountdown.textContent = 'Closed';
       document.querySelectorAll('.cd-num').forEach(el => el.textContent = '00');
-      
+
+      // Registration closed: disable the Register buttons and show the deadline notice
+      document.querySelectorAll('[data-open-form]').forEach(btn => {
+        btn.removeAttribute('href');
+        btn.setAttribute('aria-disabled', 'true');
+        btn.textContent = 'Registrations closed';
+      });
+      const closedNote = document.querySelector('[data-reg-closed-note]');
+      if (closedNote) closedNote.hidden = false;
       return;
     }
 
@@ -87,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const hEl = el.querySelector('[data-cd="hours"]');
       const mEl = el.querySelector('[data-cd="minutes"]');
       const sEl = el.querySelector('[data-cd="seconds"]');
-      
+
       if (dEl) dEl.textContent = days.toString().padStart(2, '0');
       if (hEl) hEl.textContent = hours.toString().padStart(2, '0');
       if (mEl) mEl.textContent = minutes.toString().padStart(2, '0');
@@ -113,28 +121,30 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
-  
+
   if (countdownEls.length > 0 || inlineCountdown) {
     updateCountdown();
     setInterval(updateCountdown, 1000);
   }
 
   /* --- 4. POSTER MODAL --- */
+  const startupPopup = document.querySelector('[data-startup-popup]');
+  const popupCloseBtn = document.querySelector('[data-popup-close]');
   const modal = document.querySelector('[data-poster-modal]');
   const openBtns = document.querySelectorAll('[data-poster-open]');
   const closeBtn = document.querySelector('[data-modal-close]');
-
-  // // if (startupPopup) {
-  // //   startupPopup.showModal();
-
-  //   if (popupCloseBtn) {
-  //     popupCloseBtn.addEventListener('click', () => startupPopup.close());
-  //   }
-
-  //   startupPopup.addEventListener('click', (e) => {
-  //     if (e.target === startupPopup) startupPopup.close();
-  //   });
-  // }
+  /*
+    if (startupPopup) {
+      startupPopup.showModal();
+  
+      if (popupCloseBtn) {
+        popupCloseBtn.addEventListener('click', () => startupPopup.close());
+      }
+  
+      startupPopup.addEventListener('click', (e) => {
+        if (e.target === startupPopup) startupPopup.close();
+      });
+    }*/
 
   if (modal) {
     openBtns.forEach(btn => {
@@ -184,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* --- 6. SCHEDULE FILTERING --- */
   const filterChips = document.querySelectorAll('[data-session-filter]');
-  
+
   filterChips.forEach(chip => {
     chip.addEventListener('click', () => {
       // Update active chip UI
@@ -347,18 +357,18 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-         
+
 
   // Scroll-spy: highlight the centered Journey step while scrolling
- 
 
-   /* --- BACK TO TOP BUTTON --- */
-const backToTopBtn = document.querySelector('.back-top');
-if (backToTopBtn) {
-  backToTopBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
+
+  /* --- BACK TO TOP BUTTON --- */
+  const backToTopBtn = document.querySelector('.back-top');
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
 });
