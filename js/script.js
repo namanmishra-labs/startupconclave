@@ -70,22 +70,7 @@ const targetDate = new Date('2026-10-12T23:59:59+05:30').getTime();
 
   function updateCountdown() {
     const now = new Date().getTime();
-    const distance = targetDate - now;
-
-    if (distance < 0) {
-      if (inlineCountdown) inlineCountdown.textContent = 'Closed';
-      document.querySelectorAll('.cd-num').forEach(el => el.textContent = '00');
-
-      // Registration closed: disable the Register buttons and show the deadline notice
-      document.querySelectorAll('[data-open-form]').forEach(btn => {
-        btn.removeAttribute('href');
-        btn.setAttribute('aria-disabled', 'true');
-        btn.textContent = 'Registrations closed';
-      });
-      const closedNote = document.querySelector('[data-reg-closed-note]');
-      if (closedNote) closedNote.hidden = false;
-      return;
-    }
+    const distance = Math.max(0, targetDate - now);
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
